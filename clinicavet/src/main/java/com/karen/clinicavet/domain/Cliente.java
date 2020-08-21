@@ -3,9 +3,11 @@ package com.karen.clinicavet.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.Entity;
+
+@Entity
 public class Cliente extends Usuario implements Serializable{
 
-	
 	private static final long serialVersionUID = 1L;
 	private String petNome;
 	private String petRaca;
