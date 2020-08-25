@@ -7,27 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.karen.clinicavet.domain.Cliente;
-import com.karen.clinicavet.domain.Usuario;
-import com.karen.clinicavet.repository.ClienteRepository;
+import com.karen.clinicavet.domain.MedicoVeterinario;
+import com.karen.clinicavet.repository.MedicoVeterinarioRepository;
 
 @RestController
-@RequestMapping(path = "/clientes")
-public class ClienteResource {
-	
+@RequestMapping(path = "/medicos")
+public class MedicoVeterinarioResource {
+
 	@Autowired
-	ClienteRepository repo;
-	
+	MedicoVeterinarioRepository repo;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Cliente> listar() {
-		
+	public List<MedicoVeterinario> listar(){
 		return repo.findAll();
-		
-	}
-	
-	public void inserir(Cliente u) {
-		
-		Cliente obj = repo.save(u);
 	}
 }
