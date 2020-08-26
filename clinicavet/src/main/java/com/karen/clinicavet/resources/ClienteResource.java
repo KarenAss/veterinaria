@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.karen.clinicavet.domain.Cliente;
-import com.karen.clinicavet.domain.Usuario;
 import com.karen.clinicavet.repository.ClienteRepository;
+import com.karen.clinicavet.services.ClienteService;
 
 @RestController
 @RequestMapping(path = "/clientes")
@@ -17,6 +17,9 @@ public class ClienteResource {
 	
 	@Autowired
 	ClienteRepository repo;
+	
+	@Autowired
+	ClienteService serv;
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
@@ -26,8 +29,8 @@ public class ClienteResource {
 		
 	}
 	
-	public void inserir(Cliente u) {
-		
-		Cliente obj = repo.save(u);
+	@RequestMapping(method = RequestMethod.POST)
+	public void inserir(Cliente cliente) {
+		serv.inserir(cliente);
 	}
 }
