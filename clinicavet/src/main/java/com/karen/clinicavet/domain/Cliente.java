@@ -35,7 +35,7 @@ public class Cliente implements Serializable{
 
 
 
-	public Cliente(Integer id, String nome, Integer idade, String email, String petNome, String petRaca, Integer perIdade, Date dataConsulta, String tipoPlano) {
+	public Cliente(Integer id, String nome, Integer idade, String email, String petNome, String petRaca, Integer petIdade, Date dataConsulta, String tipoPlano) {
 		this.id = id;
 		this.nome = nome;
 		this.idade = idade;

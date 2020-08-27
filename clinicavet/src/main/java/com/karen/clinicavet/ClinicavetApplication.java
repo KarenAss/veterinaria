@@ -29,6 +29,7 @@ public class ClinicavetApplication implements CommandLineRunner{
 	@Autowired
 	ConsultaRepository con;
 	
+	
 	public static void main(String[] args) throws ParseException {
 		SpringApplication.run(ClinicavetApplication.class, args);
 		
