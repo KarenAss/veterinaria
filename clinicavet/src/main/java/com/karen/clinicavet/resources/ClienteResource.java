@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,5 +36,15 @@ public class ClienteResource {
 		serv.inserir(cli);
 	}
 	
+	@RequestMapping(method = RequestMethod.PUT)
+	public void atualizar(@RequestBody ClienteDTO clienteDto) {
+		Cliente cli = serv.fromDto(clienteDto);
+		serv.atualizar(cli);
+	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public void deletar (@PathVariable Integer id) {
+		serv.deletar(id);
+		
+	}
 }
