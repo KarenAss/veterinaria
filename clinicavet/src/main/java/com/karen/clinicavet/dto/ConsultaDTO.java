@@ -3,6 +3,10 @@ package com.karen.clinicavet.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import com.karen.clinicavet.domain.enums.EstadoConsulta;
+
 public class ConsultaDTO implements Serializable{
 	
 	/**
@@ -10,12 +14,17 @@ public class ConsultaDTO implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	
+	
 	private Integer idCliente;
+	
+	
 	private Integer idMedico;
+	
 	private Date data;
 	private String diagnostico;
 	private String receita;
-	private Integer estado;
+	private EstadoConsulta estado;
 	public Integer getId() {
 		return id;
 	}
@@ -52,10 +61,10 @@ public class ConsultaDTO implements Serializable{
 	public void setReceita(String receita) {
 		this.receita = receita;
 	}
-	public Integer getEstado() {
+	public EstadoConsulta getEstado() {
 		return estado;
 	}
-	public void setEstado(Integer estado) {
+	public void setEstado(EstadoConsulta estado) {
 		this.estado = estado;
 	}
 	

@@ -41,7 +41,7 @@ public class Consulta implements Serializable{
 		
 	}
 
-	public Consulta(Integer id, Integer idMedico, Date data, String diagnostico, String receita,
+	public Consulta(Integer id, Date data, String diagnostico, String receita,
 			EstadoConsulta estado) {
 		super();
 		this.id = id;
@@ -52,7 +52,7 @@ public class Consulta implements Serializable{
 		
 	}
 	
-	public Consulta(Integer id, Integer idMedico, Date data, String diagnostico, String receita,
+	public Consulta(Integer id, Date data, String diagnostico, String receita,
 			EstadoConsulta estado, Cliente cliente, MedicoVeterinario medico) {
 		super();
 		this.id = id;
@@ -64,13 +64,10 @@ public class Consulta implements Serializable{
 		this.medico = medico;
 	}
 
-	@Override
-	public String toString() {
-		return "Consulta [id=" + id + ", data=" + data
-				+ ", diagnostico=" + diagnostico + ", receita=" + receita + ", estado=" + estado + ", Cliente = "+cliente.getId()+ ", Medico = "+medico.getId()+"]";
-	}
+
 
 	
+
 	public Integer getId() {
 		return id;
 	}
