@@ -2,8 +2,7 @@ package com.karen.clinicavet.dto;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 
@@ -20,10 +19,20 @@ public class ClienteNewDTO {
 	private Integer petIdade;
 	private Date dataConsulta;
 	private String tipoPlano;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
 	private String logradouro;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
 	private String numero;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
 	private String complemento;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
 	private String bairro;
+	
+	@NotEmpty(message="Preenchimento obrigatório!")
 	private String cep;
 	
 	private Integer cidadeId;
