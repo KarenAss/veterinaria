@@ -42,8 +42,6 @@ public class ConsultaService {
 	
 	public void update (Consulta consultaNew, Consulta consulta) {
 		consultaNew.setId(consulta.getId());
-		consultaNew.setIdCliente(consulta.getIdCliente());
-		consultaNew.setIdMedico(consulta.getIdMedico());
 		consultaNew.setData(consulta.getData());
 		consultaNew.setDiagnostico(consulta.getDiagnostico());
 		consultaNew.setEstado(consulta.getEstado());

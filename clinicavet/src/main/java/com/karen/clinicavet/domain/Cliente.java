@@ -1,12 +1,19 @@
 package com.karen.clinicavet.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente implements Serializable{
@@ -23,8 +30,15 @@ public class Cliente implements Serializable{
 	private Integer petIdade;
 	private Date dataConsulta;
 	
+	@OneToMany(mappedBy="cliente", cascade = CascadeType.ALL)
+	private List<Endereco> endereco = new ArrayList();
+	
 	
 	private String tipoPlano;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy ="cliente")
+	private List<Consulta> consultas = new ArrayList<>();
 	
 	
 	
@@ -32,7 +46,6 @@ public class Cliente implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 
 
 	public Cliente(Integer id, String nome, Integer idade, String email, String petNome, String petRaca, Integer petIdade, Date dataConsulta, String tipoPlano) {
@@ -47,7 +60,16 @@ public class Cliente implements Serializable{
 		this.tipoPlano = tipoPlano;
 	}
 
-	
+
+
+	public List<Endereco> getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(List<Endereco> endereco) {
+		this.endereco = endereco;
+	}
 
 
 	public Integer getId() {
@@ -162,7 +184,7 @@ public class Cliente implements Serializable{
 	public String toString() {
 		return "Cliente [id=" + id + ", nome=" + nome + ", idade=" + idade + ", email=" + email + ", petNome=" + petNome
 				+ ", petRaca=" + petRaca + ", petIdade=" + petIdade + ", dataConsulta=" + dataConsulta + ", tipoPlano="
-				+ tipoPlano + "]";
+				+ tipoPlano + ", consultas = "+ consultas+", endereco = "+endereco+"]";
 	}
 
 
@@ -240,6 +262,18 @@ public class Cliente implements Serializable{
 		} else if (!tipoPlano.equals(other.tipoPlano))
 			return false;
 		return true;
+	}
+
+
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
 	}
 	
 	

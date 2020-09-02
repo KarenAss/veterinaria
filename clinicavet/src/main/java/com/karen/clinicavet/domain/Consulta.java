@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.karen.clinicavet.domain.enums.EstadoConsulta;
 
 @Entity
@@ -16,33 +19,55 @@ public class Consulta implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private Integer idCliente;
-	private Integer idMedico;
 	private Date data;
 	private String diagnostico;
 	private String receita;
 	private Integer estado;
 	
+	
+	
+	
+	@ManyToOne
+	@JoinColumn(name="cliente_id")
+	private Cliente cliente;
+	
+	
+	
+	@ManyToOne
+	@JoinColumn(name="medico_id")
+	private MedicoVeterinario medico;
+	
 	public Consulta() {
 		
 	}
 
-	public Consulta(Integer id, Integer idCliente, Integer idMedico, Date data, String diagnostico, String receita,
+	public Consulta(Integer id, Integer idMedico, Date data, String diagnostico, String receita,
 			EstadoConsulta estado) {
 		super();
 		this.id = id;
-		this.idCliente = idCliente;
-		this.idMedico = idMedico;
 		this.data = data;
 		this.diagnostico = diagnostico;
 		this.receita = receita;
 		this.estado = estado.getCod();
+		
+	}
+	
+	public Consulta(Integer id, Integer idMedico, Date data, String diagnostico, String receita,
+			EstadoConsulta estado, Cliente cliente, MedicoVeterinario medico) {
+		super();
+		this.id = id;
+		this.data = data;
+		this.diagnostico = diagnostico;
+		this.receita = receita;
+		this.estado = estado.getCod();
+		this.cliente = cliente;
+		this.medico = medico;
 	}
 
 	@Override
 	public String toString() {
-		return "Consulta [id=" + id + ", idCliente=" + idCliente + ", idMedico=" + idMedico + ", data=" + data
-				+ ", diagnostico=" + diagnostico + ", receita=" + receita + ", estado=" + estado + "]";
+		return "Consulta [id=" + id + ", data=" + data
+				+ ", diagnostico=" + diagnostico + ", receita=" + receita + ", estado=" + estado + ", Cliente = "+cliente.getId()+ ", Medico = "+medico.getId()+"]";
 	}
 
 	
@@ -54,21 +79,6 @@ public class Consulta implements Serializable{
 		this.id = id;
 	}
 
-	public Integer getIdCliente() {
-		return idCliente;
-	}
-
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
-	}
-
-	public Integer getIdMedico() {
-		return idMedico;
-	}
-
-	public void setIdMedico(Integer idMedico) {
-		this.idMedico = idMedico;
-	}
 
 	public Date getData() {
 		return data;
@@ -101,6 +111,7 @@ public class Consulta implements Serializable{
 	public void setEstado(EstadoConsulta estado) {
 		this.estado = estado.getCod();
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -110,8 +121,6 @@ public class Consulta implements Serializable{
 		result = prime * result + ((diagnostico == null) ? 0 : diagnostico.hashCode());
 		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
-		result = prime * result + ((idMedico == null) ? 0 : idMedico.hashCode());
 		result = prime * result + ((receita == null) ? 0 : receita.hashCode());
 		return result;
 	}
@@ -142,22 +151,33 @@ public class Consulta implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (idCliente == null) {
-			if (other.idCliente != null)
-				return false;
-		} else if (!idCliente.equals(other.idCliente))
-			return false;
-		if (idMedico == null) {
-			if (other.idMedico != null)
-				return false;
-		} else if (!idMedico.equals(other.idMedico))
-			return false;
+		
 		if (receita == null) {
 			if (other.receita != null)
 				return false;
 		} else if (!receita.equals(other.receita))
 			return false;
 		return true;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public MedicoVeterinario getMedico() {
+		return medico;
+	}
+
+	public void setMedico(MedicoVeterinario medico) {
+		this.medico = medico;
+	}
+
+	public void setEstado(Integer estado) {
+		this.estado = estado;
 	}
 	
 	

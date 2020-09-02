@@ -1,12 +1,17 @@
 package com.karen.clinicavet.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class MedicoVeterinario implements Serializable{
@@ -23,9 +28,25 @@ public class MedicoVeterinario implements Serializable{
 	private Date horarioTrab;
 	private Double salario;
 	
+	@JsonIgnore
+	@OneToMany(mappedBy ="cliente")
+	private List<Consulta> consultas = new ArrayList<>();
 	
 	public MedicoVeterinario() {
 		
+	}
+	
+	public MedicoVeterinario(Integer id, String nome, Integer idade, String email, String especialidade,
+			Date horarioTrab, Double salario, List<Consulta> consultas) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.idade = idade;
+		this.email = email;
+		this.especialidade = especialidade;
+		this.horarioTrab = horarioTrab;
+		this.salario = salario;
+		this.consultas = consultas;
 	}
 
 
@@ -115,7 +136,7 @@ public class MedicoVeterinario implements Serializable{
 	@Override
 	public String toString() {
 		return "MedicoVeterinario [id=" + id + ", nome=" + nome + ", idade=" + idade + ", email=" + email
-				+ ", especialidade=" + especialidade + ", horarioTrab=" + horarioTrab + ", salario=" + salario + "]";
+				+ ", especialidade=" + especialidade + ", horarioTrab=" + horarioTrab + ", salario=" + salario + ", consultas = "+consultas+"]";
 	}
 
 
@@ -180,6 +201,16 @@ public class MedicoVeterinario implements Serializable{
 			return false;
 		return true;
 	}
+
+	public List<Consulta> getConsultas() {
+		return consultas;
+	}
+
+	public void setConsultas(List<Consulta> consultas) {
+		this.consultas = consultas;
+	}
+	
+	
 	
 	
 }

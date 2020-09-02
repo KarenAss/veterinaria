@@ -8,13 +8,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.karen.clinicavet.domain.Consulta;
+import com.karen.clinicavet.domain.Endereco;
+
 
 @Repository
-public interface ConsultaRepository extends JpaRepository<Consulta,Integer>{
+public interface EnderecoRepository extends JpaRepository <Endereco,Integer>{
 
 	@Transactional
 	@Modifying
-	@Query("DELETE FROM Consulta WHERE cliente_id =id")
-	void deleteFromIdCliente(@Param("cliente_id") Integer id);
+	@Query("DELETE FROM Endereco e WHERE cliente_id =id")
+	void deleteFromIdCliente(@Param("id") Integer id);
+	
 }
