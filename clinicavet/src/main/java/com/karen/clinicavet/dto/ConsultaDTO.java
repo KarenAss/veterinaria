@@ -15,10 +15,10 @@ public class ConsultaDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	
-	
+	@NotEmpty
 	private Integer idCliente;
 	
-	
+	@NotEmpty
 	private Integer idMedico;
 	
 	private Date data;

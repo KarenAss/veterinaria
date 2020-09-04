@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,9 @@ public class MedicoVeterinario implements Serializable{
 	@JsonIgnore
 	@OneToMany(mappedBy ="cliente")
 	private List<Consulta> consultas = new ArrayList<>();
+	
+	@OneToMany(mappedBy="medico", cascade = CascadeType.ALL)
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	public MedicoVeterinario() {
 		
@@ -136,7 +140,7 @@ public class MedicoVeterinario implements Serializable{
 	@Override
 	public String toString() {
 		return "MedicoVeterinario [id=" + id + ", nome=" + nome + ", idade=" + idade + ", email=" + email
-				+ ", especialidade=" + especialidade + ", horarioTrab=" + horarioTrab + ", salario=" + salario + ", consultas = "+consultas+"]";
+				+ ", especialidade=" + especialidade + ", horarioTrab=" + horarioTrab + ", salario=" + salario + ", consultas = "+consultas+", endereços = "+enderecos+"]";
 	}
 
 
@@ -208,6 +212,14 @@ public class MedicoVeterinario implements Serializable{
 
 	public void setConsultas(List<Consulta> consultas) {
 		this.consultas = consultas;
+	}
+
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
+
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
 	}
 	
 	

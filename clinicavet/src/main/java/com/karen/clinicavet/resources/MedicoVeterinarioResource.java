@@ -2,6 +2,8 @@ package com.karen.clinicavet.resources;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,20 +28,20 @@ public class MedicoVeterinarioResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void inserir(@RequestBody MedicoVeterinarioDTO obj) {
-		MedicoVeterinario med = serv.fromDto(obj);
+	public void inserir(@Valid @RequestBody MedicoVeterinarioDTO medicoDto) {
+		MedicoVeterinario med = serv.fromDto(medicoDto);
 		serv.inserir(med);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void atualizar(@RequestBody MedicoVeterinarioDTO obj) {
-		MedicoVeterinario med = serv.fromDto(obj);
+	public void atualizar(@Valid @RequestBody MedicoVeterinarioDTO medicoDto) {
+		MedicoVeterinario med = serv.fromDto(medicoDto);
 		serv.atualizar(med);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public void deletar (@PathVariable Integer id) {
 		serv.deletar(id);
-		
+	
 	}
 }

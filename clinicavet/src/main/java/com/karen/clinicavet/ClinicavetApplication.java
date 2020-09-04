@@ -73,6 +73,8 @@ public class ClinicavetApplication implements CommandLineRunner{
 		data = formato.parse("13/09/2020");
 		MedicoVeterinario m1 = new MedicoVeterinario(1, "Arthur", 25, "arthuradf", "Dermatologista", data, 1.000);
 		medico.save(m1);
+		m1.setEnderecos(endereco);
+		medico.save(m1);
 		data = formato.parse("13/09/2020");
 		EstadoConsulta consulta = null;
 		Consulta co1 = new Consulta(1, data, "Febre", "Dipirona", consulta.AGENDADA,c1,m1);

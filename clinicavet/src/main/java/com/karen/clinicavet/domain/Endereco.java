@@ -35,6 +35,13 @@ public class Endereco implements Serializable {
 	@JoinColumn(name="cliente_id")
 	private Cliente cliente;
 	
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name="medico_id")
+	private MedicoVeterinario medico;
+	
+	
+
 	@ManyToOne
 	@JoinColumn(name="cidade_id")
 	private Cidade cidade;
@@ -53,6 +60,18 @@ public class Endereco implements Serializable {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.cliente = cliente;
+		this.setCidade(cidade);
+	}
+	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
+			MedicoVeterinario medico, Cidade  cidade) {
+		super();
+		this.id = id;
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.medico = medico;
 		this.setCidade(cidade);
 	}
 
@@ -145,6 +164,13 @@ public class Endereco implements Serializable {
 		return true;
 	}
 	
+	public MedicoVeterinario getMedico() {
+		return medico;
+	}
+
+	public void setMedico(MedicoVeterinario medico) {
+		this.medico = medico;
+	}
 	
 }
 
