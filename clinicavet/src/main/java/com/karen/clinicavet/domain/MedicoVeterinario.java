@@ -3,9 +3,13 @@ package com.karen.clinicavet.domain;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,6 +32,12 @@ public class MedicoVeterinario implements Serializable{
 	private String especialidade;
 	private Date horarioTrab;
 	private Double salario;
+	private String senha;
+	private String cpf;
+	
+	@ElementCollection
+	@CollectionTable(name ="TELEFONEMEDICO")
+	private Set<String> telefones = new HashSet<>(); 
 	
 	@JsonIgnore
 	@OneToMany(mappedBy ="cliente")
@@ -55,7 +65,7 @@ public class MedicoVeterinario implements Serializable{
 
 
 	public MedicoVeterinario(Integer id, String nome, Integer idade, String email, String especialidade,
-			Date horarioTrab, Double salario) {
+			Date horarioTrab, Double salario, String senha, String cpf) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -64,6 +74,8 @@ public class MedicoVeterinario implements Serializable{
 		this.especialidade = especialidade;
 		this.horarioTrab = horarioTrab;
 		this.salario = salario;
+		this.cpf = cpf;
+		this.senha = senha;
 	}
 
 
@@ -220,6 +232,26 @@ public class MedicoVeterinario implements Serializable{
 
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
+	}
+
+	public Set<String> getTelefones() {
+		return telefones;
+	}
+
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getCpf() {
+		return cpf;
 	}
 	
 	

@@ -46,10 +46,18 @@ public class MedicoVeterinarioService {
 	}
 	
 	public MedicoVeterinario fromDto(MedicoVeterinarioDTO obj) {
-		MedicoVeterinario med = new MedicoVeterinario(obj.getId(),obj.getNome(), obj.getIdade(), obj.getEmail(), obj.getEspecialidade(), obj.getHorarioTrab(), obj.getSalario());
+		MedicoVeterinario med = new MedicoVeterinario(obj.getId(),obj.getNome(), obj.getIdade(), obj.getEmail(), obj.getEspecialidade(), obj.getHorarioTrab(), obj.getSalario(),obj.getSenha(), obj.getCpf());
 		Cidade cid = new Cidade(obj.getCidadeId(), null, null);
 		Endereco end = new Endereco(null,obj.getLogradouro(),obj.getNumero(),obj.getComplemento(),obj.getBairro(), obj.getCep(),med, cid);
 		med.getEnderecos().add(end);
+		med.getTelefones().add(obj.getTelefone1());
+		if(obj.getTelefone2()!=null) {
+			med.getTelefones().add(obj.getTelefone2());
+		}
+		if(obj.getTelefone3()!=null) {
+			med.getTelefones().add(obj.getTelefone3());
+		}
+		
 		return med;
 	}
 	
@@ -70,6 +78,8 @@ public class MedicoVeterinarioService {
 		medicoNew.setSalario(med.getSalario());
 		medicoNew.setEspecialidade(med.getEspecialidade());
 		medicoNew.setHorarioTrab(med.getHorarioTrab());
+		medicoNew.setSenha(med.getSenha());
+		medicoNew.setTelefones(med.getTelefones());
 	}
 	
 	public void updateEndereco(MedicoVeterinario clienteDto, MedicoVeterinario cliente) {

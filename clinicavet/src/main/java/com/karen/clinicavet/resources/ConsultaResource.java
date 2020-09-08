@@ -46,4 +46,9 @@ public class ConsultaResource {
 		serv.deletar(id);
 		
 	}
+	
+	@RequestMapping(value = "/{id}", method=RequestMethod.GET)
+	public Consulta listarPorId(@PathVariable Integer id){
+		return serv.listarPorId(id);
+	}
 }

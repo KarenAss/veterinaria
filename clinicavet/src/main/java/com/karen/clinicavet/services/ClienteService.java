@@ -35,6 +35,7 @@ public class ClienteService {
 		cliente.setId(null);
 		repo.save(cliente);
 		endRepo.saveAll(cliente.getEndereco());
+	
 		return cliente;
 	}
 	
@@ -48,14 +49,30 @@ public class ClienteService {
 	}
 	
 	public Cliente fromDto(ClienteDTO obj) {
-		Cliente cli = new Cliente(obj.getId(), obj.getNome(), obj.getIdade(), obj.getEmail(), obj.getPetNome(), obj.getPetRaca(), obj.getPetIdade(), obj.getDataConsulta(), obj.getTipoPlano());
+		Cliente cli = new Cliente(obj.getId(), obj.getNome(), obj.getIdade(), obj.getEmail(), obj.getPetNome(), obj.getPetRaca(), obj.getPetIdade(), obj.getDataConsulta(), obj.getTipoPlano(), obj.getSenha(),obj.getCpf());
+		cli.getTelefones().add(obj.getTelefone1());
+		if(obj.getTelefone2()!=null) {
+			cli.getTelefones().add(obj.getTelefone2());
+		}
+		if(obj.getTelefone3()!=null) {
+			cli.getTelefones().add(obj.getTelefone3());
+		}
+		
 		return cli;
 	}
 	public Cliente fromDto(ClienteNewDTO obj) {
-		Cliente cli = new Cliente(obj.getId(), obj.getNome(), obj.getIdade(), obj.getEmail(), obj.getPetNome(), obj.getPetRaca(), obj.getPetIdade(), obj.getDataConsulta(), obj.getTipoPlano());
+		Cliente cli = new Cliente(obj.getId(), obj.getNome(), obj.getIdade(), obj.getEmail(), obj.getPetNome(), obj.getPetRaca(), obj.getPetIdade(), obj.getDataConsulta(), obj.getTipoPlano(),obj.getSenha(),obj.getCpf());
 		Cidade cid = new Cidade(obj.getCidadeId(), null, null);
 		Endereco end = new Endereco(null,obj.getLogradouro(),obj.getNumero(),obj.getComplemento(),obj.getBairro(), obj.getCep(),cli, cid);
 		cli.getEndereco().add(end);
+		cli.getTelefones().add(obj.getTelefone1());
+		if(obj.getTelefone2()!=null) {
+			cli.getTelefones().add(obj.getTelefone2());
+		}
+		if(obj.getTelefone3()!=null) {
+			cli.getTelefones().add(obj.getTelefone3());
+		}
+		
 		return cli;
 	}
 	
@@ -77,6 +94,8 @@ public class ClienteService {
 		clienteDto.setPetIdade(cliente.getPetIdade());
 		clienteDto.setPetRaca(cliente.getPetRaca());
 		clienteDto.setTipoPlano(cliente.getTipoPlano());
+		clienteDto.setSenha(cliente.getSenha());
+		clienteDto.setTelefones(cliente.getTelefones());
 	}
 	
 	public void deletar(Integer id) {

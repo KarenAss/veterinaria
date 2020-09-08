@@ -44,4 +44,9 @@ public class MedicoVeterinarioResource {
 		serv.deletar(id);
 	
 	}
+	
+	@RequestMapping(value = "/{id}",method=RequestMethod.GET)
+	public MedicoVeterinario listarPorId(@PathVariable Integer id){
+		return serv.listarPorId(id);
+	}
 }

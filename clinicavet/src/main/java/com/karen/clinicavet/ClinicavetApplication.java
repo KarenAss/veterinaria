@@ -60,7 +60,7 @@ public class ClinicavetApplication implements CommandLineRunner{
 		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 		Date data = formato.parse("23/11/2015");
-		Cliente c1 = new Cliente(1,"Karen", 18, "karenadf", "Thor", "Vira lata",2, data, "Premium");
+		Cliente c1 = new Cliente(1,"Karen", 18, "karenadf", "Thor", "Vira lata",2, data, "Premium", "12345","123456");
 		cliente.save(c1);
 		Estado es = new Estado(1, "São Paulo");
 		est.save(es);
@@ -71,7 +71,7 @@ public class ClinicavetApplication implements CommandLineRunner{
 		endereco.add(end);
 		c1.setEndereco(endereco);
 		data = formato.parse("13/09/2020");
-		MedicoVeterinario m1 = new MedicoVeterinario(1, "Arthur", 25, "arthuradf", "Dermatologista", data, 1.000);
+		MedicoVeterinario m1 = new MedicoVeterinario(1, "Arthur", 25, "arthuradf", "Dermatologista", data, 1.000, "12344", "14622");
 		medico.save(m1);
 		m1.setEnderecos(endereco);
 		medico.save(m1);
