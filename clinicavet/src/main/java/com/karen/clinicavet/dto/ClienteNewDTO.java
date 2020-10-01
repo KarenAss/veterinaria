@@ -20,6 +20,7 @@ public class ClienteNewDTO {
 	private Date dataConsulta;
 	private String tipoPlano;
 	private String senha;
+	
 	private String cpf;
 	@NotEmpty(message="O preenchimento é obrigatório")
 	private String telefone1;

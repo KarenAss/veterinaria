@@ -5,11 +5,13 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.karen.clinicavet.domain.MedicoVeterinario;
 import com.karen.clinicavet.dto.MedicoVeterinarioDTO;
@@ -23,30 +25,33 @@ public class MedicoVeterinarioResource {
 	MedicoVeterinarioService serv;
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public List<MedicoVeterinario> listar(){
-		return serv.listar();
+	public ResponseEntity<List<MedicoVeterinario>> listar(){
+		return ResponseEntity.ok().body(serv.listar());
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void inserir(@Valid @RequestBody MedicoVeterinarioDTO medicoDto) {
+	public ResponseEntity<Void> inserir(@Valid @RequestBody MedicoVeterinarioDTO medicoDto) {
 		MedicoVeterinario med = serv.fromDto(medicoDto);
 		serv.inserir(med);
+		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(med.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void atualizar(@Valid @RequestBody MedicoVeterinarioDTO medicoDto) {
+	public ResponseEntity<Void> atualizar(@Valid @RequestBody MedicoVeterinarioDTO medicoDto) {
 		MedicoVeterinario med = serv.fromDto(medicoDto);
 		serv.atualizar(med);
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public void deletar (@PathVariable Integer id) {
+	public ResponseEntity<Void> deletar (@PathVariable Integer id) {
 		serv.deletar(id);
-	
+		return ResponseEntity.noContent().build();
 	}
 	
 	@RequestMapping(value = "/{id}",method=RequestMethod.GET)
-	public MedicoVeterinario listarPorId(@PathVariable Integer id){
-		return serv.listarPorId(id);
+	public ResponseEntity<MedicoVeterinario> listarPorId(@PathVariable Integer id){
+		return ResponseEntity.ok().body(serv.listarPorId(id));
 	}
 }
