@@ -1,0 +1,2 @@
+INDEX VERSION 1.131+C:\Users\karen\Documents\veterinaria\.metadata\.plugins\org.eclipse.jdt.core
+3773055656.index
