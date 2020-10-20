@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.karen.clinicavet.domain.Cliente;
 import com.karen.clinicavet.dto.ClienteNewDTO;
+import com.karen.clinicavet.kafka.Producer;
 import com.karen.clinicavet.services.ClienteService;
 
 @RestController
@@ -34,10 +35,12 @@ public class ClienteResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteNewDTO clienteDto) {
+	public ResponseEntity<Void> inserir(@Valid @RequestBody ClienteNewDTO clienteDto) throws InterruptedException {
 		Cliente cli = serv.fromDto(clienteDto);
 		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cli.getId()).toUri();
 		serv.inserir(cli);
+		Producer producer = new Producer();
+		producer.main(cli);
 		return ResponseEntity.created(uri).build();
 	}
 	

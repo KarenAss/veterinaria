@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.karen.clinicavet.domain.MedicoVeterinario;
 import com.karen.clinicavet.dto.MedicoVeterinarioDTO;
+import com.karen.clinicavet.kafka.ProducerMedicoVeterinario;
 import com.karen.clinicavet.services.MedicoVeterinarioService;
 
 @RestController
@@ -34,6 +35,8 @@ public class MedicoVeterinarioResource {
 		MedicoVeterinario med = serv.fromDto(medicoDto);
 		serv.inserir(med);
 		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(med.getId()).toUri();
+		ProducerMedicoVeterinario producer = new ProducerMedicoVeterinario();
+		producer.main(med);
 		return ResponseEntity.created(uri).build();
 	}
 	
