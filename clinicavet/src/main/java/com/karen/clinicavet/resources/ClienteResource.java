@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.karen.clinicavet.domain.Cliente;
 import com.karen.clinicavet.dto.ClienteNewDTO;
+import com.karen.clinicavet.kafka.ConsumerCliente;
 import com.karen.clinicavet.kafka.Producer;
 import com.karen.clinicavet.services.ClienteService;
 
@@ -26,6 +27,10 @@ public class ClienteResource {
 	@Autowired
 	ClienteService serv;
 	
+	Producer producer = new Producer();
+	
+	
+	ConsumerCliente consumer = new ConsumerCliente();
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Cliente>> listar() {
@@ -39,8 +44,9 @@ public class ClienteResource {
 		Cliente cli = serv.fromDto(clienteDto);
 		java.net.URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cli.getId()).toUri();
 		serv.inserir(cli);
-		Producer producer = new Producer();
 		producer.main(cli);
+		consumer.main();
+		
 		return ResponseEntity.created(uri).build();
 	}
 	

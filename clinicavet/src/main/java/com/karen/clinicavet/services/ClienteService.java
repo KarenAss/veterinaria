@@ -35,7 +35,8 @@ public class ClienteService {
 		cliente.setId(null);
 		repo.save(cliente);
 		endRepo.saveAll(cliente.getEndereco());
-	
+		
+		System.out.println("Inseriu no banco");
 		return cliente;
 	}
 	
